@@ -18,7 +18,7 @@
                         <th>На складе</th>
                         <th>Необходимость</th>
                     </tr>
-                    <script>let i=1;</script>
+                    <script>var i=1;</script>
                     {{#parts}}
                         <script>
                             document.write('<tr onclick="onClick('+i+++');">')
@@ -47,9 +47,9 @@
                     <input type="hidden" id="navFilterType" name="type" value="">
                     <input type="hidden" id="navFilterRadio" name="radio" value="">
                     <script>
-                        let site=document.getElementsByName('site')[0];
+                        var site=document.getElementsByName('site')[0];
                         if(filterType!=="")
-                            document.getElementById('navFilterType')[0].setAttribute("value", filterType);
+                            document.getElementById('navFilterType').setAttribute("value", filterType);
                         if(filterRadio!=="")
                             document.getElementById('navFilterRadio').setAttribute("value", filterRadio);
                     </script>
@@ -125,7 +125,7 @@
         </form>
         <script>
             if(filterType!=="")
-                document.getElementById('filterType').setAttribute("text", filterType);
+                document.getElementById('filterType').setAttribute("value", filterType);
             if(filterRadio!=="")
                 document.getElementById(filterRadio).setAttribute("checked", true);
         </script>

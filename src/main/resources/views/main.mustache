@@ -1,0 +1,134 @@
+<html>
+<head>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/table.css" rel="stylesheet">
+    <link href="css/record.css" rel="stylesheet">
+    <script src="js/table.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <h2>Список деталей</h2>
+        <div class="table">
+            <div align='center'>
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>Тип</th>
+                        <th>Модель</th>
+                        <th>На складе</th>
+                        <th>Необходимость</th>
+                    </tr>
+                    <script>let i=1;</script>
+                    {{#parts}}
+                        <script>
+                            document.write('<tr onclick="onClick('+i+++');">')
+                        </script>
+                            <td>{{id}}</td>
+                            <td>{{type}}</td>
+                            <td>{{model}}</td>
+                            <td>{{count}}</td>
+                            <td>{{#need}}Yes{{/need}}{{^need}}No{{/need}}</td>
+                        </tr>
+                    {{/parts}}
+                </table>
+            </div>
+            <div align="center">
+                <br>Можно собрать: {{count}} компьютер(ов)<br><br><br>
+            </div>
+        </div>
+        <script>
+            filterType="{{#filterType}}{{filterType}}{{/filterType}}";
+            filterRadio="{{#filterRadio}}{{filterRadio}}{{/filterRadio}}";
+        </script>
+        <div align="center" class="menuButton" style="position: fixed; bottom: 40px">
+            <div class="nav" style="display: inline-block">
+                <form action="/nav" >
+                    <input type="hidden" name="site" value="{{site}}">
+                    <input type="hidden" id="navFilterType" name="type" value="">
+                    <input type="hidden" id="navFilterRadio" name="radio" value="">
+                    <script>
+                        let site=document.getElementsByName('site')[0];
+                        if(filterType!=="")
+                            document.getElementById('navFilterType')[0].setAttribute("value", filterType);
+                        if(filterRadio!=="")
+                            document.getElementById('navFilterRadio').setAttribute("value", filterRadio);
+                    </script>
+                    <button style="margin-left: 50pt" id="backButton" onclick="site.setAttribute('value', parseInt(site.getAttribute('value'))-10)"><-</button>
+                    <button style="margin-right: 90pt" id="nextButton" onclick="site.setAttribute('value', parseInt(site.getAttribute('value'))+10)">-></button>
+                </form>
+            </div>
+
+            <div class="filter" style="display: inline-block">
+                <button id="filterButton" onclick="document.getElementsByClassName('filterRecord')[0].style.display='block'">Фильтр</button>
+            </div>
+
+            <div class="edit" style="display: inline-block">
+                <button id="addButton" style="margin-left: 90pt" onclick="document.getElementsByClassName('addRecord')[0].style.display='block'">Добавить</button>
+                <button id="editButton" onclick="editClick();">Изменить</button>
+            </div>
+        </div>
+    </div>
+    <div class="addRecord record">
+        <form class="form" action="add">
+            <div class="close">
+                <a onclick="document.getElementsByClassName('addRecord')[0].style.display='none'">&times;</a>
+            </div>
+            <div class="container">
+                <label><b>Тип</b><input type="text" name="type"></label>
+                <label><b>Модель</b><input type="text" name="model"></label>
+                <label><b>На складе</b><input type="text" name="count"></label>
+                <label><b>Необходимость</b><input type="text" name="need"></label>
+                <div align="right" class="button">
+                    <button type="submit">Добавить</button>
+                    <button type="reset" onclick="document.getElementsByClassName('addRecord')[0].style.display='none'">Отмена</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="editRecord record">
+        <form class="form" action="edit">
+            <input name="line" type="hidden" value="">
+            <input type="hidden" name="remove">
+            <div class="close">
+                <a onclick="document.getElementsByClassName('editRecord')[0].style.display='none'">&times;</a>
+            </div>
+            <div class="container">
+                <label><b>Тип</b><input type="text" name="type"></label>
+                <label><b>Модель</b><input type="text" name="model"></label>
+                <label><b>На складе</b><input type="text" name="count"></label>
+                <label><b>Необходимость</b><input type="text" name="need"></label>
+                <div align="right" class="button">
+                    <button type="submit" onclick="document.getElementsByName('remove')[0].setAttribute('value', '1')">Удалить</button>
+                    <button type="submit">Изменить</button>
+                    <button type="reset" onclick="document.getElementsByClassName('editRecord')[0].style.display='none'">Отмена</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="filterRecord record">
+        <form class="form" action="/filter">
+            <div class="close">
+                <a onclick="document.getElementsByClassName('filterRecord')[0].style.display='none'">&times;</a>
+            </div>
+            <div class="container">
+                <label><b>По типу:</b><input type="text" id="filterType" name="type"></label>
+                <label><b>Отображать все детали</b><input type="radio" id="all" value="all" name="radio" checked></label><br><br>
+                <label><b>Отображать только необходимые</b><input type="radio" id="need" value="need" name="radio"></label><br><br>
+                <label><b>Отображать только опциальные</b><input type="radio" id="optional" value="optional" name="radio"></label><br><br>
+                <div align="right" class="button">
+                    <button type="submit">Фильтр</button>
+                    <button type="reset" onclick="
+                        document.location.href = '/';">Отмена
+                    </button>
+                </div>
+            </div>
+        </form>
+        <script>
+            if(filterType!=="")
+                document.getElementById('filterType').setAttribute("text", filterType);
+            if(filterRadio!=="")
+                document.getElementById(filterRadio).setAttribute("checked", true);
+        </script>
+    </div>
+</body>
+</html>

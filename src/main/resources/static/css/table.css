@@ -1,0 +1,72 @@
+/* Table */
+
+.table{
+    padding: 0 5% 5%;
+    overflow: auto;
+}
+
+h2{
+    text-align: center;
+    color: green;
+}
+
+table{
+    border-collapse: collapse;
+    border: 2px solid green;
+    width: 100%;
+}
+td, th{
+    border: 2px solid green;
+    text-align: center;
+    padding: 10px;
+}
+td{
+    cursor: pointer;
+}
+
+/* Button */
+.menuButton{
+    margin-right: 10%;
+}
+
+.menuButton button{
+    font-size: 16px;
+    padding: 12px 20px;
+    width: 130px;
+    margin: 0 0 0 20px;
+}
+
+.menuButton .nav button{
+    width: 60px;
+}
+
+@media screen and (max-width: 980px) {
+    .menuButton button {
+        font-size: 10px;
+        padding-left: 10px;
+    }
+}
+
+.close{
+    text-align: center;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.close a {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    border-color: transparent;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.close a:hover,
+.close a:focus {
+    color: red;
+    cursor: pointer;
+}

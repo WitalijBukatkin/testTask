@@ -1,4 +1,4 @@
-use test;
+use heroku_c15afcbc95bd973;
 drop table if exists parts;
 create table parts(
 	id int primary key auto_increment,

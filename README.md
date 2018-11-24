@@ -2,6 +2,8 @@
 TestTask for JavaRush
 Witalij Bukatkin
 
+Deployed on https://testtaskwitalijbukatkin.herokuapp.com
+
 1. Create Database Test using init.sql
 2. Enter your username and password from MySQLServer in testTask/src/main/resources/application.properties
 3. Press "Check out from VC" in IntelliJ IDEA
